@@ -1,10 +1,40 @@
-import Toolbar from "./Toolbar";
+function AlertButton({ message, children }) {
+  function handleClick() {
+    alert(message);
+  }
 
-export default function App() {
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>Custom Alert Buttons</h1>
-      <Toolbar />
+    <button onClick={handleClick}>
+      {children}
+    </button>
+  );
+}
+
+function Toolbar() {
+  const buttons = [
+    { id: 1, message: "Downloading!", children: "Download File" },
+    { id: 2, message: "Sharing!", children: "Share Document" },
+    { id: 3, message: "Uploading!", children: "Upload Image" },
+    { id: 4, message: "Saving!", children: "Save Draft" }
+  ];
+
+  return (
+    <div>
+      <h1>Dynamic Alert Buttons</h1>
+
+      {buttons.map((btn) => (
+        <AlertButton
+          key={btn.id}
+          message={btn.message}
+        >
+          {btn.children}
+        </AlertButton>
+      ))}
+
     </div>
   );
+}
+
+export default function App() {
+  return <Toolbar />;
 }
